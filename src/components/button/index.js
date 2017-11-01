@@ -224,7 +224,10 @@ export default class Button extends BaseComponent {
     const color = this.getLabelColor();
     if (label) {
       return (
-        <Text style={[this.styles.text, color && {color}, sizeStyle, {...typography}, labelStyle]} numberOfLines={numberOfLines || 1}>
+        <Text
+          style={[this.styles.text, color && {color}, sizeStyle, {...typography}, labelStyle]}
+          numberOfLines={numberOfLines || 1}
+        >
           {label}
         </Text>
       );
