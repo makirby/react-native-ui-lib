@@ -54,7 +54,7 @@ message&&_react2.default.createElement(_text2.default,{style:[styles.message,mes
 
 
 
-}}]);return LoaderScreen;}(_commons.BaseComponent);LoaderScreen.displayName='LoaderScreen';LoaderScreen.propTypes=_extends({},_reactNative.ActivityIndicator.propTypes,{loaderColor:_react2.default.PropTypes.string,message:_propTypes2.default.string,messageStyle:_propTypes2.default.oneOfType([_propTypes2.default.object,_propTypes2.default.number,_propTypes2.default.array]),overlay:_propTypes2.default.bool});exports.default=LoaderScreen;
+}}]);return LoaderScreen;}(_commons.BaseComponent);LoaderScreen.displayName='LoaderScreen';LoaderScreen.propTypes=_extends({},_reactNative.ActivityIndicator.propTypes,{loaderColor:_propTypes2.default.string,message:_propTypes2.default.string,messageStyle:_propTypes2.default.oneOfType([_propTypes2.default.object,_propTypes2.default.number,_propTypes2.default.array]),overlay:_propTypes2.default.bool});exports.default=LoaderScreen;
 
 
 var styles=_reactNative.StyleSheet.create({

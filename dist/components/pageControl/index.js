@@ -63,7 +63,7 @@ style:[_this2.styles.pageIndicator,getColorStyle(color,index,currentPage)]}));})
 
 
 
-}}]);return PageControl;}(_commons.BaseComponent);PageControl.displayName='PageControl';PageControl.propTypes={containerStyle:_propTypes2.default.oneOfType([_propTypes2.default.object,_propTypes2.default.number,_propTypes2.default.array]),numOfPages:_propTypes2.default.number,currentPage:_propTypes2.default.number,onPagePress:_propTypes2.default.func,color:_react2.default.PropTypes.string,size:_propTypes2.default.number};exports.default=PageControl;
+}}]);return PageControl;}(_commons.BaseComponent);PageControl.displayName='PageControl';PageControl.propTypes={containerStyle:_propTypes2.default.oneOfType([_propTypes2.default.object,_propTypes2.default.number,_propTypes2.default.array]),numOfPages:_propTypes2.default.number,currentPage:_propTypes2.default.number,onPagePress:_propTypes2.default.func,color:_propTypes2.default.string,size:_propTypes2.default.number};exports.default=PageControl;
 
 
 function createStyles(){var size=arguments.length>0&&arguments[0]!==undefined?arguments[0]:10;

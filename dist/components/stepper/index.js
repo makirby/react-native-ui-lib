@@ -1,4 +1,5 @@
 Object.defineProperty(exports,"__esModule",{value:true});var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();var _react=require('react');var _react2=_interopRequireDefault(_react);
+var _propTypes=require('prop-types');var _propTypes2=_interopRequireDefault(_propTypes);
 var _reactNative=require('react-native');
 
 
@@ -101,4 +102,4 @@ onPress:function onPress(){return _this3.updateValue(_this3.state.value+1);}})))
 
 
 
-}}]);return Stepper;}(_commons.BaseComponent);Stepper.displayName='Stepper';Stepper.propTypes={label:_react2.default.PropTypes.string,min:_react2.default.PropTypes.number.isRequired,max:_react2.default.PropTypes.number,containerStyle:_react2.default.PropTypes.object,onValueChange:_react2.default.PropTypes.func,initialValue:_react2.default.PropTypes.number.isRequired};exports.default=Stepper;
+}}]);return Stepper;}(_commons.BaseComponent);Stepper.displayName='Stepper';Stepper.propTypes={label:_propTypes2.default.string,min:_propTypes2.default.number.isRequired,max:_propTypes2.default.number,containerStyle:_propTypes2.default.object,onValueChange:_propTypes2.default.func,initialValue:_propTypes2.default.number.isRequired};exports.default=Stepper;

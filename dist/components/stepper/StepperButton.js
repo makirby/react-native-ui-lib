@@ -1,4 +1,5 @@
 Object.defineProperty(exports,"__esModule",{value:true});var _react=require('react');var _react2=_interopRequireDefault(_react);
+var _propTypes=require('prop-types');var _propTypes2=_interopRequireDefault(_propTypes);
 var _reactNative=require('react-native');function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}
 
 
@@ -15,23 +16,23 @@ StepperButton.propTypes={
 
 
 
-label:_react2.default.PropTypes.string,
+label:_propTypes2.default.string,
 
 
 
-testId:_react2.default.PropTypes.string,
+testId:_propTypes2.default.string,
 
 
 
-styles:_react2.default.PropTypes.object.isRequired,
+styles:_propTypes2.default.object.isRequired,
 
 
 
-disabled:_react2.default.PropTypes.bool,
+disabled:_propTypes2.default.bool,
 
 
 
-onPress:_react2.default.PropTypes.func};
+onPress:_propTypes2.default.func};
 
 
 StepperButton.displayName='StepperButton';exports.default=

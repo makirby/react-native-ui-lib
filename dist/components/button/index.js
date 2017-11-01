@@ -224,7 +224,10 @@ var typography=this.extractTypographyValue();
 var color=this.getLabelColor();
 if(label){
 return(
-_react2.default.createElement(_text2.default,{style:[this.styles.text,color&&{color:color},sizeStyle,_extends({},typography),labelStyle],numberOfLines:numberOfLines||1},
+_react2.default.createElement(_text2.default,{
+style:[this.styles.text,color&&{color:color},sizeStyle,_extends({},typography),labelStyle],
+numberOfLines:numberOfLines||1},
+
 label));
 
 
