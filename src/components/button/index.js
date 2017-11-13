@@ -6,6 +6,7 @@ import {BaseComponent} from '../../commons';
 import Text from '../text';
 import TouchableOpacity from '../touchableOpacity';
 import {Colors, Typography, ThemeManager, BorderRadiuses} from '../../style';
+import View from '../view';
 
 /**
  * @description: Basic button component
@@ -78,6 +79,14 @@ export default class Button extends BaseComponent {
      */
     enableShadow: PropTypes.bool, // iOS-only
     /**
+     * avoid inner button padding
+     */
+    avoidInnerPadding: PropTypes.bool,
+    /**
+     * avoid minimum width constraints
+     */
+    avoidMinWidth: PropTypes.bool,
+    /**
      * Use to identify the button in tests
      */
     testID: PropTypes.string,
@@ -109,6 +118,16 @@ export default class Button extends BaseComponent {
 
   generateStyles() {
     this.styles = createStyles(this.props);
+  }
+
+  get isOutline() {
+    const {outline, outlineColor} = this.getThemeProps();
+    return Boolean(outline || outlineColor);
+  }
+
+  get isFilled() {
+    const {link} = this.getThemeProps();
+    return !this.isOutline && !link;
   }
 
   getBackgroundColor() {
@@ -143,16 +162,22 @@ export default class Button extends BaseComponent {
     return color;
   }
 
-  getLabelSizeStyle() {
-    const {size, link} = this.props;
+  getContentSizeStyle() {
+    const {size, link, avoidInnerPadding} = this.props;
+
+    if (avoidInnerPadding) {
+      return;
+    }
 
     const LABEL_STYLE_BY_SIZE = {};
-    LABEL_STYLE_BY_SIZE[Button.sizes.xSmall] = {paddingHorizontal: 12, ...Typography.text80};
-    LABEL_STYLE_BY_SIZE[Button.sizes.small] = {paddingHorizontal: 15, ...Typography.text80};
-    LABEL_STYLE_BY_SIZE[Button.sizes.medium] = {paddingHorizontal: 24, ...Typography.text80};
+    LABEL_STYLE_BY_SIZE[Button.sizes.xSmall] = {paddingHorizontal: 12};
+    LABEL_STYLE_BY_SIZE[Button.sizes.small] = {paddingHorizontal: 15};
+    LABEL_STYLE_BY_SIZE[Button.sizes.medium] = {paddingHorizontal: 24};
     LABEL_STYLE_BY_SIZE[Button.sizes.large] = {paddingHorizontal: 36};
 
     const labelSizeStyle = LABEL_STYLE_BY_SIZE[size];
+
+    // todo: treat the same as avoidInnerPadding
     if (link) {
       labelSizeStyle.paddingHorizontal = 0;
     }
@@ -160,8 +185,21 @@ export default class Button extends BaseComponent {
     return labelSizeStyle;
   }
 
-  getContainerSizeStyle() {
+  getLabelSizeStyle() {
     const {size} = this.props;
+
+    const LABEL_STYLE_BY_SIZE = {};
+    LABEL_STYLE_BY_SIZE[Button.sizes.xSmall] = {...Typography.text80};
+    LABEL_STYLE_BY_SIZE[Button.sizes.small] = {...Typography.text80};
+    LABEL_STYLE_BY_SIZE[Button.sizes.medium] = {...Typography.text80};
+    LABEL_STYLE_BY_SIZE[Button.sizes.large] = {};
+
+    const labelSizeStyle = LABEL_STYLE_BY_SIZE[size];
+    return labelSizeStyle;
+  }
+
+  getContainerSizeStyle() {
+    const {size, outline, avoidMinWidth} = this.props;
 
     const CONTAINER_STYLE_BY_SIZE = {};
     CONTAINER_STYLE_BY_SIZE[Button.sizes.xSmall] = {paddingVertical: 4, minWidth: 60};
@@ -169,18 +207,35 @@ export default class Button extends BaseComponent {
     CONTAINER_STYLE_BY_SIZE[Button.sizes.medium] = {paddingVertical: 11, minWidth: 125};
     CONTAINER_STYLE_BY_SIZE[Button.sizes.large] = {paddingVertical: 16, minWidth: 138};
 
-    return CONTAINER_STYLE_BY_SIZE[size];
+    if (outline) {
+      _.forEach(CONTAINER_STYLE_BY_SIZE, (style) => {
+        style.paddingVertical -= 1; // eslint-disable-line
+      });
+    }
+
+
+    const containerSizeStyle = CONTAINER_STYLE_BY_SIZE[size];
+    if (avoidMinWidth) {
+      containerSizeStyle.minWidth = undefined;
+    }
+
+    return containerSizeStyle;
   }
 
   getOutlineStyle() {
-    const {outline, outlineColor, link} = this.props;
+    const {outline, outlineColor, link, disabled} = this.props;
+    let outlineStyle;
     if ((outline || outlineColor) && !link) {
-      return {
+      outlineStyle = {
         borderWidth: 1,
-        borderColor: outlineColor || Colors.dark70,
+        borderColor: outlineColor || Colors.blue30,
       };
+
+      if (disabled) {
+        outlineStyle.borderColor = Colors.dark70;
+      }
     }
-    return undefined;
+    return outlineStyle;
   }
 
   getBorderRadiusStyle() {
@@ -200,14 +255,14 @@ export default class Button extends BaseComponent {
   }
 
   renderIcon() {
-    const {iconSource, iconStyle, label, link, disabled} = this.props;
+    const {iconSource, iconStyle, label, disabled} = this.props;
     if (iconSource) {
       return (
         <Image
           source={iconSource}
           style={[
             this.styles.icon,
-            link && disabled && this.styles.iconDisabled,
+            !this.isFilled && disabled && this.styles.iconDisabled,
             label && this.styles.iconSpacing,
             iconStyle,
           ]}
@@ -219,13 +274,13 @@ export default class Button extends BaseComponent {
 
   renderLabel() {
     const {label, labelStyle, numberOfLines} = this.props;
-    const sizeStyle = this.getLabelSizeStyle();
     const typography = this.extractTypographyValue();
     const color = this.getLabelColor();
+    const labelSizeStyle = this.getLabelSizeStyle();
     if (label) {
       return (
         <Text
-          style={[this.styles.text, color && {color}, sizeStyle, {...typography}, labelStyle]}
+          style={[this.styles.text, color && {color}, labelSizeStyle, {...typography}, labelStyle]}
           numberOfLines={numberOfLines || 1}
         >
           {label}
@@ -242,6 +297,7 @@ export default class Button extends BaseComponent {
     const backgroundColor = this.getBackgroundColor();
     const outlineStyle = this.getOutlineStyle();
     const containerSizeStyle = this.getContainerSizeStyle();
+    const contentSizeStyle = this.getContentSizeStyle();
     const borderRadiusStyle = this.getBorderRadiusStyle();
 
     return (
@@ -265,9 +321,11 @@ export default class Button extends BaseComponent {
         testID={testID}
         {...others}
       >
-        {this.props.children}
-        {this.renderIcon()}
-        {this.renderLabel()}
+        <View row centerV style={contentSizeStyle}>
+          {this.props.children}
+          {this.renderIcon()}
+          {this.renderLabel()}
+        </View>
         {/* <View
           style={[
             this.styles.innerContainer,
@@ -323,7 +381,6 @@ function createStyles({color}) {
     },
     iconSpacing: {
       marginRight: 7,
-      marginBottom: 2,
       paddingRight: 0,
     },
   });

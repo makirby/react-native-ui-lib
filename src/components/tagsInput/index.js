@@ -245,12 +245,12 @@ export default class TagsInput extends BaseComponent {
         <TextInput
           ref={r => (this.input = r)}
           text80
+          blurOnSubmit={false}
           {...others}
           value={value}
           onSubmitEditing={this.addTag}
           onChangeText={this.onChangeText}
           onKeyPress={this.onKeyPress}
-          blurOnSubmit={false}
           enableErrors={false}
           hideUnderline
           selectionColor={isLastTagMarked ? 'transparent' : undefined}
@@ -293,6 +293,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     minWidth: 120,
     marginVertical: GUTTER_SPACING / 2,
+    paddingVertical: 4.5,
   },
   tag: {
     backgroundColor: Colors.blue30,
