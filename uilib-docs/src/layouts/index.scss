@@ -1,0 +1,42 @@
+@import 'src/styles/constants';
+
+html,
+body {
+  margin: 0;
+  font-family: Avenir;
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#___gatsby,
+[data-reactroot] {
+  height: 100%;
+}
+
+.header {
+  padding: 24px;
+  background: $cyan50;
+  color: $dark10;
+  
+  .links {
+    display: flex;
+    align-items: center;
+  }
+
+  a {
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+    margin-right: 10px;
+    
+  }
+}
+
+.main {
+  margin: 0 auto;
+  // max-width: 960px;
+  height: 100%;
+}

@@ -4,6 +4,7 @@ import {
   Text,
   View,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 import createStyles from './style';
 import {BaseComponent} from '../../commons';
