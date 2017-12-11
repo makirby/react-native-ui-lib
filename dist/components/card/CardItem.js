@@ -36,7 +36,7 @@ _react2.default.createElement(_reactNative.View,{style:[this.styles.container,st
 this.props.children));
 
 
-}}]);return CardItem;}(_commons.BaseComponent);CardItem.displayName='CardItem';CardItem.propTypes={row:_propTypes2.default.bool,column:_propTypes2.default.bool};exports.default=CardItem;
+}}]);return CardItem;}(_commons.BaseComponent);CardItem.displayName='Card.Item';CardItem.propTypes={row:_propTypes2.default.bool,column:_propTypes2.default.bool};exports.default=CardItem;
 
 
 function createStyles(_ref2){var column=_ref2.column;

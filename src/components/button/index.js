@@ -311,11 +311,7 @@ export default class Button extends BaseComponent {
   }
 
   renderLabel() {
-<<<<<<< HEAD
-    const {label, labelStyle, numberOfLines} = this.props;
-=======
     const {label, labelStyle, numberOfLines, labelProps} = this.props;
->>>>>>> ac197d0
     const typography = this.extractTypographyValue();
     const color = this.getLabelColor();
     const labelSizeStyle = this.getLabelSizeStyle();
@@ -324,12 +320,8 @@ export default class Button extends BaseComponent {
         <Text
           style={[this.styles.text, color && {color}, labelSizeStyle, {...typography}, labelStyle]}
           numberOfLines={numberOfLines || 1}
-<<<<<<< HEAD
-        >
-=======
           {...labelProps}
-          >
->>>>>>> ac197d0
+        >
           {label}
         </Text>
       );
